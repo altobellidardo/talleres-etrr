@@ -1,0 +1,49 @@
+---
+import { SignOutButton } from "@clerk/astro/components"
+const user = await Astro.locals.currentUser()
+const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
+---
+
+<div>
+	<p>¡Ya estas registrado!</p>
+	<p>Nombre: {firstName} {lastName}</p>
+	<p>Email: {emailAddress}</p>
+	
+	<SignOutButton>
+		Cerrar sesión
+	</SignOutButton>
+</div>
+
+<a href="/workshops">
+	<button>
+		Registrarse a un taller
+	</button>
+</a>
+
+<style>
+	div {
+		border: 1px solid var(--etrr-white);
+		padding: 1rem;
+		border-radius: 0.5rem;
+		margin-bottom: 1rem;
+		display: flex;
+		flex-direction: column;
+		gap: .5rem;
+	}
+
+	p:first-child {
+		font-weight: 700;
+	}
+
+  button {
+		padding: 0.5rem 1rem;
+		background-color: #fff;
+		border: none;
+		border-radius: 0.3rem;
+		font-weight: 700;
+
+		&:hover {
+			background-color: var(--etrr-blue);
+		}
+	}
+</style>
