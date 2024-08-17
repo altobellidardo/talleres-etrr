@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro'
+import Header from '../components/Header.astro'
+
+const user = await Astro.locals.currentUser()
+
+if (!user) return Astro.redirect("/")
+
+import { db, users } from 'astro:db'
+const usersData = await db.select().from(users)
+
+const { emailAddress, firstName, lastName} = user.externalAccounts[0]
+
+// check if user exists
+if (usersData.find(user => user.email === emailAddress)) {
+  const userData = usersData.find(user => user.email === emailAddress)
+
+  if (userData.role === 'user') return Astro.redirect("/workshops")
+  if (userData.role === 'admin') return Astro.redirect("/admin")
+}
+
+// create user
+const newUser = {
+  email: emailAddress,
+  name: firstName + ' ' + lastName,
+  role: 'user'
+}
+
+// add user
+await db.insert(users).values(newUser)
+
+// redirect
+return Astro.redirect("/workshops")
+---
+
+<Layout>
+  <Header />
+  <p>Estamos registrandote, espere un momento...</p>
+</Layout>
+
+<style>
+  p {
+    color: var(--etrr-white);
+    text-align: center;
+  }
+</style>
