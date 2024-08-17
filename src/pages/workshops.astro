@@ -1,0 +1,25 @@
+---
+import Layout from "../layouts/Layout.astro"
+const user = await Astro.locals.currentUser()
+
+if (!user) {
+  return Astro.redirect("/")
+}
+
+const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
+---
+
+<Layout>
+  <section>
+    <h1>Talleres</h1>
+    <h3>Talleres registrados</h3>
+    <h3>Talleres disponibles</h3>
+  </section>
+</Layout>
+
+<style>
+  section {
+    color: var(--etrr-white);
+    margin-left: 3rem;
+  }
+</style>
