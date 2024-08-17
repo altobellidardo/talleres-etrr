@@ -2,9 +2,11 @@
 import Layout from "../layouts/Layout.astro"
 const user = await Astro.locals.currentUser()
 
-if (!user) {
-  return Astro.redirect("/")
-}
+if (!user) return Astro.redirect("/")
+
+import { db, workshops } from 'astro:db'
+
+const data = await db.select().from(workshops)
 
 const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
 ---
@@ -15,11 +17,29 @@ const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
     <h3>Talleres registrados</h3>
     <h3>Talleres disponibles</h3>
   </section>
+
+  {data.map(workshop => (
+    <article>
+      <h4>{workshop.name}</h4>
+      <p>{workshop.description}</p>
+      <p>{workshop.capacity} personas</p>
+      <p>{workshop.teachers}</p>
+    </article>
+  ))}
 </Layout>
 
 <style>
   section {
     color: var(--etrr-white);
     margin-left: 3rem;
+  }
+
+  article {
+    border: 1px solid var(--etrr-white);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--etrr-white);
+    width: fit-content;
   }
 </style>
