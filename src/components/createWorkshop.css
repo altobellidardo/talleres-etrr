@@ -1,0 +1,61 @@
+/* .create-btn {
+    background-color: var(--etrr-blue);
+    color: var(--etrr-white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 2px solid var(--etrr-orange);
+    min-width: 600px;
+    width: 50vw;
+    margin: auto;
+    color: var(--etrr-white);
+    margin-bottom: 2rem;
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    input {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: 2px solid var(--etrr-orange);
+        background: none;
+        color: var(--etrr-white);
+    }
+
+    button {
+        background-color: var(--etrr-blue);
+        color: var(--etrr-white);
+        border-radius: 0.5rem;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+        font-weight: bold;
+        width: fit-content;
+
+        &:hover {
+            outline: 2px solid var(--etrr-white);
+        }
+    }
+
+    button#crear {
+        width: 100%;
+    }
+
+    button#close {
+        font-size: large;
+        background: none;
+        margin-left: auto;
+    }
+} */
