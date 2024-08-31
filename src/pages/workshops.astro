@@ -1,5 +1,7 @@
 ---
+import Header from "../components/Header.astro"
 import Layout from "../layouts/Layout.astro"
+
 const user = await Astro.locals.currentUser()
 
 if (!user) return Astro.redirect("/")
@@ -12,23 +14,29 @@ const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
 ---
 
 <Layout>
-  <section>
-    <h1>Talleres</h1>
-    <h3>Talleres registrados</h3>
-    <h3>Talleres disponibles</h3>
-  </section>
+  <Header />
 
-  {data.map(workshop => (
-    <article>
-      <h4>{workshop.name}</h4>
-      <p>{workshop.description}</p>
-      <p>{workshop.capacity} personas</p>
-      <p>{workshop.teachers}</p>
-    </article>
-  ))}
+  <a href="/" class="bg-etrr-orange/50 hover:bg-etrr-orange px-4 py-1 rounded-lg ml-12">
+    Ir al inicio
+  </a>
+
+  <section class="flex flex-col gap-4 ml-12 mt-10">
+    <h3 class="text-xl font-bold">Talleres registrados</h3>
+    {data.map(workshop => (
+      <article class="border border-etrr-white w-fit p-4 rounded-lg">
+        <h4 class="font-bold">{workshop.name}</h4>
+        {workshop.image_url && <img src={workshop.image_url} alt={workshop.name} class="w-48 mx-auto" />}
+        <p>{workshop.description}</p>
+        <p>{workshop.capacity} personas</p>
+        <p>{workshop.teachers}</p>
+
+        <button class="w-full py-1 rounded text-white bg-blue-500 hover:bg-blue-600 mt-4">Inscribirse</button>
+      </article>
+    ))}
+  </section>
 </Layout>
 
-<style>
+<!-- <style>
   section {
     color: var(--etrr-white);
     margin-left: 3rem;
@@ -42,4 +50,4 @@ const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
     color: var(--etrr-white);
     width: fit-content;
   }
-</style>
+</style> -->

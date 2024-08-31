@@ -1,14 +1,37 @@
 ---
+import CreateWorkshop from "../components/createWorkshop"
+import Header from "../components/Header.astro"
 import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout>
-  <a href="/">Ir al inicio</a>
-  <h1>Página de administración en proceso</h1>
+  <Header />
+  
+  <main class="ml-12">
+    <a href="/" class="bg-etrr-orange/50 hover:bg-etrr-orange px-4 py-1 rounded-lg">
+      Ir al inicio
+    </a>
+    
+    <h1 class="text-3xl my-8">Página de administración</h1>
+    
+    <section>
+      <h2 class="font-bold text-lg">Talleres</h2>
+      <CreateWorkshop client:load />
+    </section>
+  </main>
 </Layout>
 
-<style>
-  h1 {
+<!-- <style>
+  a {
     color: var(--etrr-white);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-weight: bold;
   }
-</style>
+
+  h1, h2 {
+    color: var(--etrr-white);
+    text-align: center;
+  }
+</style> -->

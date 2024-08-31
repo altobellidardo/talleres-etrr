@@ -4,23 +4,25 @@ const user = await Astro.locals.currentUser()
 const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
 ---
 
-<div>
+<div class="border border-etrr-white rounded-lg p-4 flex flex-col gap-2">
 	<p>¡Ya estas registrado!</p>
-	<p>Nombre: {firstName} {lastName}</p>
+	<small>Nombre
+		<p class="text-xl">{firstName} {lastName}</p>
+	</small>
 	<p>Email: {emailAddress}</p>
 	
-	<SignOutButton>
+	<SignOutButton class:list={['px-8', 'py-1', 'rounded', 'text-white', 'bg-blue-500', 'hover:bg-blue-600']}>
 		Cerrar sesión
 	</SignOutButton>
 </div>
 
 <a href="/workshops">
-	<button>
-		Registrarse a un taller
+	<button class="px-8 py-1 rounded bg-etrr-orange/80 font-bold mt-4">
+		Inscribirse a un taller
 	</button>
 </a>
 
-<style>
+<!-- <style>
 	div {
 		border: 1px solid var(--etrr-white);
 		padding: 1rem;
@@ -35,6 +37,11 @@ const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
 		font-weight: 700;
 	}
 
+	p.primary {
+		font-size: large;
+		font-weight: bold;
+	}
+
   button {
 		padding: 0.5rem 1rem;
 		background-color: #fff;
@@ -46,4 +53,4 @@ const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
 			background-color: var(--etrr-blue);
 		}
 	}
-</style>
+</style> -->
