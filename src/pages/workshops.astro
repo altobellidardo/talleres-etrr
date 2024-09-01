@@ -24,8 +24,8 @@ const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
     <h3 class="text-xl font-bold">Talleres registrados</h3>
     {data.map(workshop => (
       <article class="border border-etrr-white w-fit p-4 rounded-lg">
-        <h4 class="font-bold">{workshop.name}</h4>
-        {workshop.image_url && <img src={workshop.image_url} alt={workshop.name} class="w-48 mx-auto" />}
+        <h4 class="font-bold mb-4">{workshop.name}</h4>
+        {workshop.image_url && <img src={workshop.image_url} alt={workshop.name} class="w-48 mx-auto rounded-lg" />}
         <p>{workshop.description}</p>
         <p>{workshop.capacity} personas</p>
         <p>{workshop.teachers}</p>

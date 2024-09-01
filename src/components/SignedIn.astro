@@ -1,56 +1,50 @@
 ---
 import { SignOutButton } from "@clerk/astro/components"
+import { getUser } from "../utils/user"
 const user = await Astro.locals.currentUser()
 const { emailAddress, firstName, lastName} = user?.externalAccounts[0]
+
+const [userData] = await getUser(emailAddress)
 ---
 
-<div class="border border-etrr-white rounded-lg p-4 flex flex-col gap-2">
-	<p>¡Ya estas registrado!</p>
-	<small>Nombre
-		<p class="text-xl">{firstName} {lastName}</p>
-	</small>
-	<p>Email: {emailAddress}</p>
-	
-	<SignOutButton class:list={['px-8', 'py-1', 'rounded', 'text-white', 'bg-blue-500', 'hover:bg-blue-600']}>
-		Cerrar sesión
-	</SignOutButton>
-</div>
+{userData.role === 'user' && (
+	<div class="border border-etrr-white rounded-lg p-4 flex flex-col gap-2">
+		<p>¡Ya estas registrado!</p>
+		<small>Nombre
+			<p class="text-xl">{firstName} {lastName}</p>
+		</small>
+		<p>Email: {emailAddress}</p>
 
-<a href="/workshops">
-	<button class="px-8 py-1 rounded bg-etrr-orange/80 font-bold mt-4">
-		Inscribirse a un taller
-	</button>
-</a>
+		{JSON.stringify(userData)}
+		
+		<SignOutButton class:list={['px-8', 'py-1', 'rounded', 'text-white', 'bg-blue-500', 'hover:bg-blue-600']}>
+			Cerrar sesión
+		</SignOutButton>
+	</div>
 
-<!-- <style>
-	div {
-		border: 1px solid var(--etrr-white);
-		padding: 1rem;
-		border-radius: 0.5rem;
-		margin-bottom: 1rem;
-		display: flex;
-		flex-direction: column;
-		gap: .5rem;
-	}
+	<a href="/workshops">
+		<button class="px-8 py-1 rounded bg-etrr-orange/80 font-bold mt-4">
+			Inscribirse a un taller
+		</button>
+	</a>
+)}
 
-	p:first-child {
-		font-weight: 700;
-	}
+{userData.role === 'admin' && (
+	<div class="border border-etrr-white rounded-lg p-4 flex flex-col gap-2">
+		<p>Cuenta Admin</p>
+		<small>Nombre
+			<p class="text-xl">{firstName} {lastName}</p>
+		</small>
+		<p>Email: {emailAddress}</p>
+		
+		<SignOutButton class:list={['px-8', 'py-1', 'rounded', 'text-white', 'bg-blue-500', 'hover:bg-blue-600']}>
+			Cerrar sesión
+		</SignOutButton>
+	</div>
 
-	p.primary {
-		font-size: large;
-		font-weight: bold;
-	}
-
-  button {
-		padding: 0.5rem 1rem;
-		background-color: #fff;
-		border: none;
-		border-radius: 0.3rem;
-		font-weight: 700;
-
-		&:hover {
-			background-color: var(--etrr-blue);
-		}
-	}
-</style> -->
+	<a href="/admin">
+		<button class="px-8 py-1 rounded bg-etrr-orange/80 font-bold mt-4">
+			Ir al panel de administración
+		</button>
+	</a>
+)}
